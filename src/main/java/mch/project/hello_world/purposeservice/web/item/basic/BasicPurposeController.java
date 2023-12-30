@@ -32,12 +32,20 @@ public class BasicPurposeController {
      * 그 후 뷰 템플릿을 호출한다.
      */
     @GetMapping("/{purposeId}")
-    public  String item(@PathVariable Long purposeId, Model model) {
+    public String item(@PathVariable Long purposeId, Model model) {
         Purpose purpose = purposeRepository.findById(purposeId);
         model.addAttribute("purpose", purpose);
         return "basic/purpose";
     }
 
+
+    /**
+     * 등록 폼 렌더링 (등록 로직 X)
+     */
+    @GetMapping("/add")
+    public String addForm() {
+        return "basic/addForm";
+    }
     /**
      * 테스트용 데이터 추가
      */
