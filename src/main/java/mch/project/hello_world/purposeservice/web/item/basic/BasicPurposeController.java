@@ -6,6 +6,7 @@ import mch.project.hello_world.purposeservice.domain.purpose.PurposeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
@@ -24,6 +25,17 @@ public class BasicPurposeController {
         List<Purpose> purposes = purposeRepository.findAll();
         model.addAttribute("purposes", purposes);
         return "basic/purposes";
+    }
+
+    /**
+     * PathVariable 로 넘어온 목표 Id로 상품을 조회하고 모델에 담아둔다.
+     * 그 후 뷰 템플릿을 호출한다.
+     */
+    @GetMapping("/{purposeId}")
+    public  String item(@PathVariable Long purposeId, Model model) {
+        Purpose purpose = purposeRepository.findById(purposeId);
+        model.addAttribute("purpose", purpose);
+        return "basic/purpose";
     }
 
     /**
