@@ -6,6 +6,7 @@ import mch.project.hello_world.purposeservice.domain.purpose.PurposeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -102,7 +103,7 @@ public class BasicPurposeController {
      * -> String과 같은 단순 참조형은 RequestParam 을 사용하고
      * -> 직접 정의한 객체의 경우 ModelAttribute를 적용한다.
      */
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addPurposeV4(Purpose purpose) {
         purposeRepository.save(purpose);
         // model.addAttribute("purpose", purpose); // 자동 추가, 생략 가능
@@ -110,6 +111,34 @@ public class BasicPurposeController {
         return "basic/purpose";
     }
 
+    /**
+     * 새로고침은 마지막에 서버에 전송된 데이터를 다시 전송하는 로직이므로
+     * 목표 등록 폼에서 저장 후 새로 고침을 할 경우 마지막에 전송한 데이터를 서버로 재전송한다.
+     * 따라서 내용은 같고 ID만 다른 데이터가 계속해서 저장된다.
+     * -> 상품 저장 후에 뷰 템플릿으로 이동하는 게 아니라 상품 상세화면으로 리다이렉트를 호출하면 된다.
+     */
+//    @PostMapping("/add")
+    public String addPurposeV5(Purpose purpose) {
+        purposeRepository.save(purpose);
+        // model.addAttribute("purpose", purpose); // 자동 추가, 생략 가능
+
+        return "redirect:/basic/purpose" + purpose.getId();
+    }
+
+    /**
+     * V5의 방식을 사용할 경우 URL 인코딩이 되지 않아 위험하다.
+     * -> RedirectAttribute를 활용한다.
+     * -> URL 인코딩 및 pathVariable, 쿼리 파라미터까지 처리해준다.
+     * + 저장되었습니다. 메시지 표출
+     */
+    @PostMapping("/add")
+    public String addPurposeV6(Purpose purpose, RedirectAttributes redirectAttributes) {
+        Purpose savePurpose = purposeRepository.save(purpose);
+
+        redirectAttributes.addAttribute("purposeId", savePurpose.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/basic/purpose/{purposeId}"; // redirectAttribute 에 넣은 값 중 이름이 일치하는 것이 들어오고 나머지는 쿼리파라미터로 들어온다.
+    }
 
     @GetMapping ("/{purposeId}/edit")
     public String editForm(@PathVariable Long purposeId, Model model) {

@@ -16,6 +16,9 @@
         <h2>목표 상세</h2>
     </div>
 
+    <!--redirectAttribute 대응 추가 -->
+    <h2 th:if="${param.status}" th:text="'저장 완료!'"></h2>
+
     <div>
         <label for="purposeId">목표 ID</label>
         <input type="text" id="purposeId" name="purposeId" class="form-control"
