@@ -110,6 +110,22 @@ public class BasicPurposeController {
         return "basic/purpose";
     }
 
+
+    @GetMapping ("/{purposeId}/edit")
+    public String editForm(@PathVariable Long purposeId, Model model) {
+        Purpose purpose = purposeRepository.findById(purposeId);
+        model.addAttribute("purpose", purpose);
+        return "basic/editForm";
+    }
+
+    @PostMapping("/{purposeId}/edit")
+    public String edit(@PathVariable Long purposeId, @ModelAttribute Purpose purpose) {
+        purposeRepository.update(purposeId, purpose);
+
+        // 목표 상세화면으로 이동하도록 리다이렉트를 호출
+        return "redirect:/basic/purposes/{purposeId}";
+    }
+
     /**
      * 테스트용 데이터 추가
      */
