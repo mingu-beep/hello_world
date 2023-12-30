@@ -64,7 +64,7 @@ public class PurposeRepositoryTest {
         //then
         assertThat(findPurpose.getPurposeName()).isEqualTo(updateParam.getPurposeName());
         assertThat(findPurpose.getPurposeContent()).isEqualTo(updateParam.getPurposeContent());
-        assertThat(findPurpose.getPurposeDate()).isEqualTo(updateParam.getPurposeDate());
+        assertThat(findPurpose.getPurposeDue()).isEqualTo(updateParam.getPurposeDue());
         assertThat(findPurpose.getAchievement()).isEqualTo(updateParam.getAchievement());
 
     }

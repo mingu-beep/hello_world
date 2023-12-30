@@ -18,14 +18,14 @@ public class Purpose {
     private Long id;
     private String purposeName;
     private String purposeContent;
-    private String purposeDate;
+    private String purposeDue;
     private Boolean achievement;
 
     public Purpose() {}
 
-    public Purpose(String purposeName, String purposeContent, String purposeDate) {
+    public Purpose(String purposeName, String purposeContent, String purposeDue) {
         this.purposeName = purposeName;
         this.purposeContent = purposeContent;
-        this.purposeDate = purposeDate;
+        this.purposeDue = purposeDue;
     }
 }

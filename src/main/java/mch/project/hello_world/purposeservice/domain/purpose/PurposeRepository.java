@@ -33,7 +33,7 @@ public class PurposeRepository {
 
         findPurpose.setPurposeName(updateParam.getPurposeName());
         findPurpose.setPurposeContent(updateParam.getPurposeContent());
-        findPurpose.setPurposeDate(updateParam.getPurposeDate());
+        findPurpose.setPurposeDue(updateParam.getPurposeDue());
         findPurpose.setAchievement(updateParam.getAchievement());
     }
 
