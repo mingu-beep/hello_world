@@ -5,9 +5,7 @@ import mch.project.hello_world.purposeservice.domain.purpose.Purpose;
 import mch.project.hello_world.purposeservice.domain.purpose.PurposeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -46,6 +44,72 @@ public class BasicPurposeController {
     public String addForm() {
         return "basic/addForm";
     }
+
+    /**
+     * RequestParam을 이용한 목표 등록 처리
+     * - 메시지 바디에 쿼리 파라미터 형식으로 전달됨을 가정한다. (purposeName=purpose&....)
+     */
+    // @PostMapping("/add")
+    public String addPurposeV2(@RequestParam String purposeName,
+                               @RequestParam String purposeContent,
+                               @RequestParam String purposeDue,
+                               Model model) {
+
+        // 1. @RequestParam 을 이용해 요청 파라미터 데이터를 변수에 저장시킨다.
+        // 2. purpose 객체를 생성하고 purposeRepository에 저장한다.
+        // 3. 저장된 purpose를 모델에 담아 뷰에 전달한다.
+        Purpose purpose = new Purpose();
+        purpose.setPurposeName(purposeName);
+        purpose.setPurposeContent(purposeContent);
+        purpose.setPurposeDue(purposeDue);
+
+        purposeRepository.save(purpose);
+
+        model.addAttribute("purpose", purpose); // 상세 화면에서 저장 결과를 보여주기 위함
+
+        return "basic/purpose";
+    }
+
+    /**
+     * @ModelAttribute를 활용한 목표 등록 처리 1
+     * - RequestParam 으로 변수를 하나하나 받기에는 수가 늘어날 수록 불리하다.
+     * - ModelAttribute 는 Purpose 객체를 생성하고 요청 파라미터의 값을 파라미터 접근법으로 입력해준다.
+     * - ModelAttribute 로 지정된 객체는 모델에 자동을 저장한다. 이때 ModelAttribute 에 지정된 이름으로 저장되니 이점 유의
+     */
+//    @PostMapping("/add")
+    public String addPurposeV2(@ModelAttribute("purpose") Purpose purpose, Model model) {
+        purposeRepository.save(purpose);
+        // model.addAttribute("purpose", purpose); // 자동 추가, 생략 가능
+
+        return "basic/purpose";
+    }
+
+    /**
+     * @ModelAttribute를 활용한 목표 등록 처리 2
+     * - ModelAttribute 의 name 생략시 클래스명의 첫글자만 소문자로 등록 Purpose -> purpose
+     */
+//    @PostMapping("/add")
+    public String addPurposeV3(@ModelAttribute Purpose purpose, Model model) {
+        purposeRepository.save(purpose);
+        // model.addAttribute("purpose", purpose); // 자동 추가, 생략 가능
+
+        return "basic/purpose";
+    }
+
+    /**
+     * @ModelAttribute를 활용한 목표 등록 처리 3
+     * - ModelAttribute 전체 생략
+     * -> String과 같은 단순 참조형은 RequestParam 을 사용하고
+     * -> 직접 정의한 객체의 경우 ModelAttribute를 적용한다.
+     */
+    @PostMapping("/add")
+    public String addPurposeV4(Purpose purpose) {
+        purposeRepository.save(purpose);
+        // model.addAttribute("purpose", purpose); // 자동 추가, 생략 가능
+
+        return "basic/purpose";
+    }
+
     /**
      * 테스트용 데이터 추가
      */
