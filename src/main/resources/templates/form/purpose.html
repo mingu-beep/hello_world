@@ -55,6 +55,15 @@
             <label for="achievement" class="form-check">달성</label>
         </div>
     </div>
+
+    <div>
+        <div>목표 분류</div>
+        <div th:each="category : ${categories}" class="form-check form-check-inline">
+            <input type="checkbox" th:field="${purpose.categories}" th:value="${category.key}" class="form-check-input" disabled>
+            <label th:for="${#ids.prev('categories')}" th:text="${category.value}" class="form-check-label">운동</label>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"

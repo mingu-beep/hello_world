@@ -38,7 +38,7 @@ public class PurposeRepository {
 
         findPurpose.setOpen(updateParam.getOpen());
         findPurpose.setAchievement(updateParam.getAchievement());
-        findPurpose.setCategory(updateParam.getCategory());
+        findPurpose.setCategories(updateParam.getCategories());
         findPurpose.setCategoryCode(updateParam.getCategoryCode());
         findPurpose.setPurposeType(updateParam.getPurposeType());
 

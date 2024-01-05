@@ -25,19 +25,19 @@ public class FormItemController {
 
     private final PurposeRepository purposeRepository;
 
-    @ModelAttribute
-    public Map<String, String> regions() {
-        Map<String, String> regions = new LinkedHashMap<>();
+    @ModelAttribute("categories")
+    public Map<String, String> categories() {
+        Map<String, String> categories = new LinkedHashMap<>();
 
-        regions.put("SEOUL", "서울");
-        regions.put("BUSAN", "부산");
-        regions.put("JEJU", "제주");
+        categories.put("EXERCISE", "운동");
+        categories.put("STUDY", "공부");
+        categories.put("RELATIONSHIP", "인간 관계");
 
-        return regions;
+        return categories;
     }
 
-    @ModelAttribute
-    public PurposeType[] itemTypes() {
+    @ModelAttribute("purposeTypes")
+    public PurposeType[] purposeTypes() {
         return PurposeType.values();
     }
 
@@ -51,7 +51,7 @@ public class FormItemController {
     }
 
     @GetMapping
-    public String items(Model model) {
+    public String purposes(Model model) {
         List<Purpose> purposes = purposeRepository.findAll();
         model.addAttribute("purposes", purposes);
         return "form/purposes";
@@ -73,11 +73,12 @@ public class FormItemController {
     @PostMapping("/add")
     public String addItem(@ModelAttribute Purpose purpose, RedirectAttributes redirectAttributes) {
 
+        log.info("purpose.achievement={}", purpose.getAchievement());
+        log.info("purpose.category={}", purpose.getCategories());
+
         log.info("purpose.open={}", purpose.getOpen());
 
-        log.info("purpose.achievement={}", purpose.getAchievement());
-        log.info("purpose.category={}", purpose.getCategory());
-
+        log.info("purpose.categories={}", purpose.getCategories());
         Purpose savedPurpose = purposeRepository.save(purpose);
         redirectAttributes.addAttribute("purposeId", savedPurpose.getId());
         redirectAttributes.addAttribute("status", true);
@@ -94,7 +95,7 @@ public class FormItemController {
     @PostMapping("/{purposeId}/edit")
     public String edit(@PathVariable Long purposeId, @ModelAttribute Purpose purpose) {
         purposeRepository.update(purposeId, purpose);
-        return "redirect:/form/items/{purposeId}";
+        return "redirect:/form/purposes/{purposeId}";
     }
 
 }

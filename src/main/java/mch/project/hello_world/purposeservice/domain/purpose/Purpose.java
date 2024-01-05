@@ -19,7 +19,14 @@ public class Purpose {
     private String purposeName;
     private String purposeContent;
     private String purposeDue;
-    private Boolean achievement;
+
+    private Boolean open; // 공개 여부
+
+    private Boolean achievement; // 달성 여부
+    private PurposeType purposeType; // 목표 타입
+
+    private String categories; // 분류
+    private String categoryCode; // 분류 코드
 
     public Purpose() {}
 

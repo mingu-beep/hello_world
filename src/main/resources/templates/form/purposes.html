@@ -31,12 +31,12 @@
             <tbody>
                 <tr th:each="purpose : ${purposes}">
                     <td><a href="purpose.html"
-                           th:href="@{/basic/purposes/{purposeId}(purposeId=${purpose.id})}"
+                           th:href="@{/form/purposes/{purposeId}(purposeId=${purpose.id})}"
                            th:text="${purpose.id}">목표 ID</a>
                     </td>
 
                     <td><a href="purpose.html"
-                           th:href="@{/basic/purposes/{purposeId}(purposeId=${purpose.id})}"
+                           th:href="@{/form/purposes/{purposeId}(purposeId=${purpose.id})}"
                            th:text="${purpose.purposeName}">목표명</a>
                     </td>
                     <td th:text="${purpose.purposeContent}"></td>
