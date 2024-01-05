@@ -35,6 +35,13 @@ public class PurposeRepository {
         findPurpose.setPurposeContent(updateParam.getPurposeContent());
         findPurpose.setPurposeDue(updateParam.getPurposeDue());
         findPurpose.setAchievement(updateParam.getAchievement());
+
+        findPurpose.setOpen(updateParam.getOpen());
+        findPurpose.setAchievement(updateParam.getAchievement());
+        findPurpose.setCategory(updateParam.getCategory());
+        findPurpose.setCategoryCode(updateParam.getCategoryCode());
+        findPurpose.setPurposeType(updateParam.getPurposeType());
+
     }
 
     public void clearStore() {

@@ -31,6 +31,24 @@
             <input type="date" id="purposeDue" name="purposeDue" th:field="*{purposeDue}" class="form-control" placeholder="목표 완료 기한을 입력하세요">
         </div>
         <hr class="my-4">
+
+        <div>공개 여부</div>
+        <div>
+            <div class="form-check">
+                <input type="checkbox" id="open" name="open" th:field="*{open}" class="form-check-input">
+                <label for="open" class="form-check-label">공개</label>
+            </div>
+        </div>
+
+        <div style="display:none;">
+            <div>달성 여부</div>
+            <div>
+                <div class="form-check">
+                    <input type="checkbox" id="achievement" name="achievement" th:field="*{achievement}" class="form-check-input">
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col">
                 <button class="w-100 btn btn-primary btn-lg" type="submit">목표 등록</button>
@@ -38,7 +56,7 @@
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='items.html'"
-                        th:onclick="|location.href='@{/basic/purposes}'|" type="button">취소</button>
+                        th:onclick="|location.href='@{/form/purposes}'|" type="button">취소</button>
             </div>
         </div>
     </form>
