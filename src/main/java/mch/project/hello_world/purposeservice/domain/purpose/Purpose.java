@@ -28,6 +28,8 @@ public class Purpose {
     private String categories; // 분류
     private String categoryCode; // 분류 코드
 
+    private String importance;
+
     public Purpose() {}
 
     public Purpose(String purposeName, String purposeContent, String purposeDue) {

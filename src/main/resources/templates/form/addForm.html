@@ -40,6 +40,8 @@
             </div>
         </div>
 
+        <hr class="my-4">
+
         <div style="display:none;">
             <div>달성 여부</div>
             <div>
@@ -48,6 +50,8 @@
                 </div>
             </div>
         </div>
+
+        <hr class="my-4">
 
         <div>
             <div>목표 분류</div>
@@ -58,6 +62,8 @@
             </div>
         </div>
 
+        <hr class="my-4">
+
         <div>
             <div>목표 종류</div>
             <div th:each="type : ${purposeTypes}" class="form-check form-check-inline">
@@ -65,6 +71,18 @@
                 <label th:for="${#ids.prev('purposeType')}" th:text="${type.description}" class="form-check-label">SOLO</label>
             </div>
         </div>
+
+        <hr class="my-4">
+
+        <div>
+            <div>중요도</div>
+            <select th:field="*{importance}" class="form-select">
+                <option value="">==중요도 선택==</option>
+                <option th:each="importance : ${importances}" th:value="${importance.code}" th:text="${importance.importanceName}">HIGH</option>
+            </select>
+        </div>
+
+        <hr class="my-4">
 
         <div class="row">
             <div class="col">

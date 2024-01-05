@@ -3,10 +3,7 @@ package mch.project.hello_world.purposeservice.web.form;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mch.project.hello_world.purposeservice.domain.purpose.Category;
-import mch.project.hello_world.purposeservice.domain.purpose.Purpose;
-import mch.project.hello_world.purposeservice.domain.purpose.PurposeRepository;
-import mch.project.hello_world.purposeservice.domain.purpose.PurposeType;
+import mch.project.hello_world.purposeservice.domain.purpose.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,13 +38,13 @@ public class FormItemController {
         return PurposeType.values();
     }
 
-    @ModelAttribute("category")
-    public List<Category> category() {
-        List<Category> deliveryCodes = new ArrayList<>();
-        deliveryCodes.add(new Category("EXERCISE", "운동"));
-        deliveryCodes.add(new Category("STUDY", "공부"));
-        deliveryCodes.add(new Category("RELATIONSHIP", "인간 관계"));
-        return deliveryCodes;
+    @ModelAttribute("importances")
+    public List<Importance> importances() {
+        List<Importance> importances = new ArrayList<>();
+        importances.add(new Importance("HIGH", "높음"));
+        importances.add(new Importance("NORMAL", "보통"));
+        importances.add(new Importance("LOW", "낮음"));
+        return importances;
     }
 
     @GetMapping
