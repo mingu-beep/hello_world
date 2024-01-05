@@ -64,6 +64,14 @@
         </div>
     </div>
 
+    <div>
+        <div>목표 종류</div>
+        <div th:each="type : ${purposeTypes}" class="form-check form-check-inline">
+            <input type="radio" th:field="${purpose.purposeType}" th:value="${type.name()}" class="form-check-input" disabled>
+            <label th:for="${#ids.prev('purposeType')}" th:text="${type.description}" class="form-check-label">SOLO</label>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"

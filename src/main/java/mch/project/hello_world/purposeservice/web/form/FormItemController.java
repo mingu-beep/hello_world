@@ -79,6 +79,9 @@ public class FormItemController {
         log.info("purpose.open={}", purpose.getOpen());
 
         log.info("purpose.categories={}", purpose.getCategories());
+
+        log.info("purpose.purposeType={}", purpose.getPurposeType());
+
         Purpose savedPurpose = purposeRepository.save(purpose);
         redirectAttributes.addAttribute("purposeId", savedPurpose.getId());
         redirectAttributes.addAttribute("status", true);
