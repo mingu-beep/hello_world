@@ -13,31 +13,31 @@
 <body>
 <div class="container">
     <div class="py-5 text-center">
-        <h2>목표 수정 폼</h2>
+        <h2 th:text="#{page.updatePurpose}">목표 수정</h2>
     </div>
     <form action="purpose.html" th:action th:object="${purpose}" method="post">
         <div>
-            <label for="id">목표 ID</label>
+            <label for="id" th:text="#{label.purpose.id}">목표 ID</label>
             <input type="text" id="id" name="id" class="form-control" value="1"
                    th:field="*{id}" readonly>
         </div>
         <div>
-            <label for="purposeName">목표명</label>
+            <label for="purposeName" th:text="#{label.purpose.purposeName}">목표명</label>
             <input type="text" id="purposeName" name="purposeName" class="form-control"
                    value="목표A" th:field="*{purposeName}">
         </div>
         <div>
-            <label for="purposeContent">목표 내용</label>
+            <label for="purposeContent" th:text="#{label.purpose.purposeContent}">목표 내용</label>
             <input type="text" id="purposeContent" name="purposeContent" class="form-control"
                    value=""  th:field="*{purposeContent}">
         </div>
         <div>
-            <label for="purposeDue">목표 완료 기한</label>
+            <label for="purposeDue" th:text="#{label.purpose.purposeDue}">목표 완료 기한</label>
             <input type="date" id="purposeDue" name="purposeDue" class="form-control"
                    value=""  th:field="*{purposeDue}">
         </div>
         <hr class="my-4">
-        <div>공개 여부</div>
+        <div th:text="#{label.purpose.open}">공개 여부</div>
         <div>
             <div class="form-check">
                 <input type="checkbox" id="open" th:field="*{open}" class="form-check-input">
@@ -47,7 +47,7 @@
 
         <hr class="my-4">
 
-        <div>달성 여부</div>
+        <div th:text="#{label.purpose.achievement}">달성 여부</div>
         <div>
             <div class="form-check">
                 <input type="checkbox" id="achievement" th:field="*{achievement}" class="form-check-input">
@@ -58,7 +58,7 @@
         <hr class="my-4">
 
         <div>
-            <div>목표 분류</div>
+            <div th:text="#{label.purpose.category}">목표 분류</div>
             <div th:each="category : ${categories}" class="form-check form-check-inline">
                 <input type="checkbox" th:field="${purpose.categories}" th:value="${category.key}" class="form-check-input">
                 <lable th:for="${#ids.prev('categories')}"
@@ -69,7 +69,7 @@
         <hr class="my-4">
 
         <div>
-            <div>목표 종류</div>
+            <div th:text="#{label.purpose.purposeType}">목표 종류</div>
             <div th:each="type : ${purposeTypes}" class="form-check form-check-inline">
                 <input type="radio" th:field="*{purposeType}" th:value="${type.name()}" class="form-check-input">
                 <label th:for="${#ids.prev('purposeType')}" th:text="${type.description}" class="form-check-label">SOLO</label>
@@ -79,7 +79,7 @@
         <hr class="my-4">
 
         <div>
-            <div>중요도</div>
+            <div th:text="#{label.purpose.importance}">중요도</div>
             <select th:field="*{importance}" class="form-select">
                 <option value="">==중요도 선택==</option>
                 <option th:each="importance : ${importances}" th:value="${importance.code}" th:text="${importance.importanceName}">HIGH</option>
@@ -90,11 +90,12 @@
 
         <div class="row">
             <div class="col">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">저장
+                <button th:text="#{button.save}" class="w-100 btn btn-primary btn-lg" type="submit">저장
                 </button>
             </div>
             <div class="col">
-                <button class="w-100 btn btn-secondary btn-lg"
+                <button th:text="#{button.cancel}"
+                        class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='purpose.html'"
                         th:onclick="|location.href='@{/form/purposes/{purposeId}(purposeId=${purpose.id})'|" type="button">취소</button>
             </div>

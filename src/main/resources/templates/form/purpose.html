@@ -13,34 +13,34 @@
 <body>
 <div class="container">
     <div class="py-5 text-center">
-        <h2>목표 상세</h2>
+        <h2 th:text="#{page.purposes}">목표 상세</h2>
     </div>
 
     <!--redirectAttribute 대응 추가 -->
     <h2 th:if="${param.status}" th:text="'저장 완료!'"></h2>
 
     <div>
-        <label for="purposeId">목표 ID</label>
+        <label th:text="#{label.purpose.id}" for="purposeId">목표 ID</label>
         <input type="text" id="purposeId" name="purposeId" class="form-control"
                value="1" th:value="${purpose.id}" readonly>
     </div>
     <div>
-        <label for="purposeName">목표명</label>
+        <label th:text="#{label.purpose.purposeName}" for="purposeName">목표명</label>
         <input type="text" id="purposeName" name="purposeName" class="form-control"
                value="목표A" th:value="${purpose.purposeName}" readonly>
     </div>
     <div>
-        <label for="purposeContent">목표 내용</label>
+        <label th:text="#{label.purpose.purposeContent}" for="purposeContent">목표 내용</label>
         <input type="text" id="purposeContent" name="purposeContent" class="form-control"
                value="" th:value="${purpose.purposeContent}" readonly>
     </div>
     <div>
-        <label for="purposeDue">목표 완료 기한</label>
+        <label th:text="#{label.purpose.purposeDue}" for="purposeDue">목표 완료 기한</label>
         <input type="date" id="purposeDue" name="purposeDue" class="form-control"
                value="" th:value="${purpose.purposeDue}" readonly>
     </div>
     <hr class="my-4">
-    <div>공개 여부</div>
+    <div th:text="#{label.purpose.open}">공개 여부</div>
     <div>
         <div class="form-check">
             <input type="checkbox" id="open" th:field="${purpose.open}" class="form-check-input" disabled>
@@ -50,7 +50,7 @@
 
     <hr class="my-4">
 
-    <div>달성 여부</div>
+    <div th:text="#{label.purpose.achievement}">달성 여부</div>
     <div>
         <div class="form-check">
             <input type="checkbox" id="achievement" th:field="${purpose.achievement}" class="form-check-input" disabled>
@@ -61,7 +61,7 @@
     <hr class="my-4">
 
     <div>
-        <div>목표 분류</div>
+        <div th:text="#{label.purpose.category}">목표 분류</div>
         <div th:each="category : ${categories}" class="form-check form-check-inline">
             <input type="checkbox" th:field="${purpose.categories}" th:value="${category.key}" class="form-check-input" disabled>
             <label th:for="${#ids.prev('categories')}" th:text="${category.value}" class="form-check-label">운동</label>
@@ -71,7 +71,7 @@
     <hr class="my-4">
 
     <div>
-        <div>목표 종류</div>
+        <div th:text="#{label.purpose.purposeType}">목표 종류</div>
         <div th:each="type : ${purposeTypes}" class="form-check form-check-inline">
             <input type="radio" th:field="${purpose.purposeType}" th:value="${type.name()}" class="form-check-input" disabled>
             <label th:for="${#ids.prev('purposeType')}" th:text="${type.description}" class="form-check-label">SOLO</label>
@@ -81,7 +81,7 @@
     <hr class="my-4">
 
     <div>
-        <div>중요도</div>
+        <div th:text="#{label.purpose.importance}">중요도</div>
         <select th:field="${purpose.importance}" class="form-select" disabled>
             <option value="">==중요도 선택==</option>
             <option th:each="importance : ${importances}" th:value="${importance.code}" th:text="${importance.importanceName}">HIGH</option>
@@ -92,14 +92,16 @@
 
     <div class="row">
         <div class="col">
-            <button class="w-100 btn btn-primary btn-lg"
+            <button th:text="#{button.save}"
+                    class="w-100 btn btn-primary btn-lg"
                     onclick="location.href='editForm.html'"
                     th:onclick="|location.href='@{/form/purposes/{purposeId}/edit(purposeId=${purpose.id})}'|" type="button">목표 수정</button>
         </div>
         <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg"
+            <button th:text="#{button.cancel}"
+                    class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='items.html'"
-                    th:onclick="|location.href='@{/form/purposes}'|" type="button">목록으로</button>
+                    th:onclick="|location.href='@{/form/purposes}'|" type="button">취소</button>
         </div>
     </div>
 </div> <!-- /container -->
